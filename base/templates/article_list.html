@@ -1,0 +1,57 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}详情{% endblock %}
+
+{% block content %}
+    <div class="col-sm-12">
+        <table class="table">
+            <tr>
+                <th>文章名称</th>
+                <th>文章分类</th>
+                <th>文章分类</th>
+                <th>文章作者</th>
+                <th>文章简介</th>
+                <th>添加时间</th>
+                <th>操作</th>
+            </tr>
+            {% for i in list %}
+                <tr>
+                    <td>{{ i.title }}</td>
+                    <td>{{ i.category }}</td>
+                    <td>{{ i.tagname }}</td>
+                    <td>{{ i.author }}</td>
+                    <td>{{ i.description }}</td>
+                    <td>{{ i.addtime }}</td>
+                    <td>
+                        <a href="/base/article_edit/{{ i.id }}" >编辑</a>
+                        <a href="javascript:;" onclick="delcate({{ i.id }})">删除</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}
+
+{% block my_js %}
+    <script>
+        function delcate(id){
+            layer.confirm('您确定要删除这个分类吗？', {
+                btn: ['确定','取消'], //按钮
+                'title':'删除'
+            }, function(){
+                $.get("/base/article_delete/"+id,{'id':"id"},function (data) {
+                    console.log(data.status);
+                    if(data.status== 0){
+                        layer.msg(data.msg, {icon: 6});
+                        location.href = location.href;
+                    }else{
+                        layer.msg(data.msg, {icon: 5});
+                    }
+                });
+            }, function(){
+            },'json');
+        }
+    </script>
+{% endblock %}
+
+

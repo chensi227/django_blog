@@ -1,0 +1,28 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}详情{% endblock %}
+
+{% block content %}
+    <div class="col-sm-12">
+    <table class="table">
+        <tr>
+            <th>名称</th>
+            <th>信息</th>
+        </tr>
+        <tr>
+            <td>语言</td>
+            <td>Python</td>
+        </tr>
+        <tr>
+            <td>框架</td>
+            <td>Django</td>
+        </tr>
+        <tr>
+            <td>网址</td>
+            <td>{{ request.get_host }}</td>
+        </tr>
+
+    </table>
+    </div>
+{% endblock %}
+
